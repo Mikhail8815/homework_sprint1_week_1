@@ -1,29 +1,31 @@
 type AddressType = {
-  street: any; // ПОДПРАВЛЯЕМ any
-  city: any; // ПОДПРАВЛЯЕМ any
+  street: string
+  city: string
 };
 
 type UserType = {
-  // ПРИДЕТСЯ САМОМУ)
+    id: number,
+    name: string,
+    age: number,
+    address: AddressType
 };
 
 type UserListPropsType = {
-  users: UserType; // ПО МОЕМУ ЧЕГО-ТО НЕ ХВАТАЕТ...
+  users: Array<UserType>
 };
 
-export const UserList = (props: 'ВСТАВЛЯЕМ ТИПИЗАЦИЮ') => {
+export const UserList = (props: UserListPropsType) => {
   return (
     <div id={'hw01-users'}>
       <h2>User List:</h2>
-
-      {/*<ul>*/}
-      {/*  {props.users.map((user) => ( // ВСЕ ТОВАРЫ В СТРАНУ ПРИЕЗЖАЮТ В КОНТЕЙНЕРАХ, А В РЕАКТЕ...*/}
-      {/*    <li key={ЭЛЕМЕНТ МАССИВА.id} id={`hw01-user-${ЭЛЕМЕНТ МАССИВА.id}`}>*/}
-      {/*      <strong>{ЭЛЕМЕНТ МАССИВА.name}</strong> (Age: {ЭЛЕМЕНТ МАССИВА.age})<strong> Address:</strong>*/}
-      {/*      {ЭЛЕМЕНТ МАССИВА.address.street}, {ЭЛЕМЕНТ МАССИВА.address.city}*/}
-      {/*    </li>*/}
-      {/*  ))}*/}
-      {/*</ul>*/}
+      <ul>
+        {props.users.map(({id, name, age, address: {street, city}}) => (
+          <li key={id} id={`hw01-user-${id}`}>
+            <strong>{name}</strong> (Age: {age})<strong> Address:</strong>
+            {street}, {city}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
